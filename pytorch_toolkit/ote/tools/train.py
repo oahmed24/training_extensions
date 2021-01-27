@@ -22,6 +22,8 @@ from ote.modules import build_arg_parser, build_arg_converter, build_trainer
 
 
 def main():
+    import sys
+    sys.exit(1)
     logging.basicConfig(level=logging.INFO)
     modules = load_config(MODULES_CONFIG_FILENAME)
 
