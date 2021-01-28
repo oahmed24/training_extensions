@@ -17,6 +17,13 @@
 import os
 from abc import ABCMeta
 
+def _debug_print_converted_args_and_exit(converted_args):
+    from pprint import pformat
+    s = pformat(converted_args)
+    s = '\nconverted_args=\n' + s + '\n'
+    s = '\n====== '.join(s.split('\n'))
+    print(s, flush=True)
+    raise RuntimeError('_debug_print_converted_args_and_exit')
 
 class BaseArgConverter(metaclass=ABCMeta):
     train_update_args_map = {}
@@ -64,6 +71,7 @@ class BaseArgConverter(metaclass=ABCMeta):
         }
         converted_args.update(self.__map_args(args, self.train_out_args_map))
 
+        _debug_print_converted_args_and_exit(converted_args)
         return converted_args
 
     def convert_compress_args(self, model_template_path, args):
@@ -82,6 +90,7 @@ class BaseArgConverter(metaclass=ABCMeta):
         }
         converted_args.update(self.__map_args(args, self.compress_out_args_map))
 
+        _debug_print_converted_args_and_exit(converted_args)
         return converted_args
 
     def convert_test_args(self, model_template_path, args):
@@ -97,6 +106,7 @@ class BaseArgConverter(metaclass=ABCMeta):
         }
         converted_args.update(self.__map_args(args, self.test_out_args_map))
 
+        _debug_print_converted_args_and_exit(converted_args)
         return converted_args
 
     def _get_extra_train_args(self, args):
