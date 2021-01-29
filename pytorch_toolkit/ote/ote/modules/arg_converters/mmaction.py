@@ -18,52 +18,6 @@ from .base import BaseArgConverter, ArgConverterMaps
 from ..registry import ARG_CONVERTERS
 
 
-class MMActionArgsConverterOLD(BaseArgConverter):
-    # NB: compress_update_args_map is the same as train_update_args_map,
-    #     but without base_learning_rate and epochs
-    # TODO(LeonidBeynenson): replace the dicts by a function that returns dicts to avoid copying of code
-    compress_update_args_map = {
-        'train_ann_files': 'data.train.ann_file',
-        'train_data_roots': 'root_dir',
-        'val_ann_files': 'data.val.ann_file',
-        'val_data_roots': 'root_dir',
-        'resume_from': 'resume_from',
-        'load_weights': 'load_from',
-        'save_checkpoints_to': 'work_dir',
-        'batch_size': 'data.videos_per_gpu',
-    }
-    train_update_args_map = {
-        'train_ann_files': 'data.train.ann_file',
-        'train_data_roots': 'root_dir',
-        'val_ann_files': 'data.val.ann_file',
-        'val_data_roots': 'root_dir',
-        'resume_from': 'resume_from',
-        'load_weights': 'load_from',
-        'save_checkpoints_to': 'work_dir',
-        'batch_size': 'data.videos_per_gpu',
-        'base_learning_rate': 'optimizer.lr',
-        'epochs': 'total_epochs',
-    }
-    train_to_compress_update_args_map = {
-        'train_ann_files': 'data.train.ann_file',
-        'train_data_roots': 'root_dir',
-        'val_ann_files': 'data.val.ann_file',
-        'val_data_roots': 'root_dir',
-# the only difference w.r.t compress_update_args_map
-#        'resume_from': 'resume_from',
-#        'load_weights': 'load_from',
-        'save_checkpoints_to': 'work_dir',
-        'batch_size': 'data.videos_per_gpu',
-    }
-    test_update_args_map = {
-        'test_ann_files': 'data.test.ann_file',
-        'test_data_roots': 'root_dir',
-    }
-
-    def __init__(self):
-        super(MMActionArgsConverter, self).__init__()
-
-
 class MMActionArgConverterMap(ArgConverterMaps):
     @staticmethod
     def _train_compression_base_args_map():

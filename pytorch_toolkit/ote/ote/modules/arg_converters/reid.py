@@ -18,26 +18,6 @@ from .base import BaseArgConverter, ArgConverterMaps
 from ..registry import ARG_CONVERTERS
 
 
-class ReidArgsConverterOLD(BaseArgConverter):
-    train_update_args_map = {
-        'train_data_roots': 'data.root',
-        'train_ann_files': '',
-        'resume_from': 'model.resume',
-        'load_weights': 'model.load_weights',
-        'save_checkpoints_to': 'data.save_dir',
-        'batch_size': 'train.batch_size',
-        'base_learning_rate': 'train.lr',
-        'epochs': 'train.max_epoch',
-    }
-    test_update_args_map = {
-        'test_ann_files': '',
-        'test_data_roots': 'data.root',
-        'load_weights': 'model.load_weights',
-    }
-
-    def __init__(self):
-        super(ReidArgsConverter, self).__init__()
-
 class ReidArgConverterMap(ArgConverterMaps):
     @staticmethod
     def _train_compression_base_args_map():
