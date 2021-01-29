@@ -18,14 +18,6 @@ import os
 from abc import ABCMeta, abstractmethod
 from collections import namedtuple
 
-def _debug_print_converted_args_and_exit(converted_args):
-    from pprint import pformat
-    s = pformat(converted_args)
-    s = '\nconverted_args=\n' + s + '\n'
-    s = '\n====== '.join(s.split('\n'))
-    print(s, flush=True)
-    raise RuntimeError('_debug_print_converted_args_and_exit')
-
 def map_args(src_args, args_map):
     return {v: src_args[k] for k, v in args_map.items()}
 
@@ -177,7 +169,6 @@ class BaseArgConverter:
         additional_converted_args = map_args(args, additional_converted_args_map)
         converted_args.update(additional_converted_args)
 
-        _debug_print_converted_args_and_exit(converted_args)
         return converted_args
 
     def convert_train_args(self, model_template_path, args):
